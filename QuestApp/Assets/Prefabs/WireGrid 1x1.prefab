@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2206280573969303073}
   - component: {fileID: 403192474654338205}
   m_Layer: 0
-  m_Name: WireGrid 20x1 (2)
+  m_Name: WireGrid 1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7302913128246070057}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 5, y: 3.5, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 0.02}
+  m_LocalScale: {x: 1, y: 1, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
