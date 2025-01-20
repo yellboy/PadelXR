@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
         var movementRight = thumbstick.x * Speed * Time.deltaTime;
         var movementForward = thumbstick.y * Speed * Time.deltaTime;
 
-        gameObject.transform.position += gameObject.transform.forward * movementForward +
-                                          gameObject.transform.right * movementRight;
+        gameObject.transform.position += Camera.main.transform.forward * movementForward +
+                                          Camera.main.transform.right * movementRight;
     }
 }
