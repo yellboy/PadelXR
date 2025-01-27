@@ -236,6 +236,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2680cf0dac899a14b99cbe965c19feb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &440184584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440184581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b05a5d626ca955499a8c28077c6040a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controllerAnchor: {fileID: 1618206452}
+  _ball: {fileID: 6010254552248547301}
 --- !u!1 &584841364
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,11 +494,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonClickActions:
   - Title: 
-    Button: 0
+    Button: 8192
     ButtonMode: 0
     Callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 440184584}
+          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+          m_MethodName: DropBall
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Title: 
+    Button: 8192
+    ButtonMode: 1
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 440184584}
+          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+          m_MethodName: MoveBallToController
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1539940711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,7 +652,41 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 440184583}
+    - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 440184584}
+    - targetCorrespondingSourceObject: {fileID: 2483171112401766338, guid: f54012181eacade4ea242c65f804720f, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1618206451}
   m_SourcePrefab: {fileID: 100100000, guid: f54012181eacade4ea242c65f804720f, type: 3}
+--- !u!1 &1618206450 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2483171112401766338, guid: f54012181eacade4ea242c65f804720f, type: 3}
+  m_PrefabInstance: {fileID: 1618206449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1618206451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618206450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
+  instanceId: 2d6c5d95-d520-4944-b4b4-30e6fe842dc9
+  version: 1
+  installationRoutineCheckpoint:
+    _installationRoutineId: 
+    _installationVariants: []
+--- !u!1 &1618206452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2482315907430333982, guid: f54012181eacade4ea242c65f804720f, type: 3}
+  m_PrefabInstance: {fileID: 1618206449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2214720910969146382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -735,6 +813,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7957c66384b0ad1488df769d63c12e83, type: 3}
+--- !u!1 &6010254552248547301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6851595164606555289, guid: 7957c66384b0ad1488df769d63c12e83, type: 3}
+  m_PrefabInstance: {fileID: 6010254552248547300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7173704091515310629
 PrefabInstance:
   m_ObjectHideFlags: 0

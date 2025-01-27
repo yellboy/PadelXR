@@ -46,7 +46,7 @@ public class RacketForceCalculation : MonoBehaviour
             //ballRb.AddForce(_velocity);
 
             // Apply spin (optional)
-            ballRb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
+            //ballRb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
         }
     }
 }
