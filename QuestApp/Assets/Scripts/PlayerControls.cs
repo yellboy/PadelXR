@@ -50,4 +50,16 @@ public class PlayerControls : MonoBehaviour
         ballRb.velocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
     }
+
+    public void MoveBallToDefault()
+    {
+        var ballRb = _ball.GetComponent<Rigidbody>();
+        ballRb.isKinematic = true;
+        ballRb.velocity = Vector3.zero;
+        ballRb.angularVelocity = Vector3.zero;
+
+        _ball.transform.rotation = Quaternion.identity;
+        _ball.transform.position = new Vector3(0, 10, 2.07f);
+    }
+
 }

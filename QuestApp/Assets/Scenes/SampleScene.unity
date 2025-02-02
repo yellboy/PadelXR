@@ -529,6 +529,42 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - Title: 
+    Button: 4
+    ButtonMode: 1
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 440184584}
+          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+          m_MethodName: MoveBallToDefault
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Title: 
+    Button: 4
+    ButtonMode: 0
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 440184584}
+          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+          m_MethodName: DropBall
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1539940711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,11 +880,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4141924177057042509, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.583
+      value: 1.827
       objectReference: {fileID: 0}
     - target: {fileID: 4141924177057042509, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.975
+      value: 2.011
       objectReference: {fileID: 0}
     - target: {fileID: 4141924177057042509, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_LocalRotation.w
@@ -877,6 +913,10 @@ PrefabInstance:
     - target: {fileID: 4141924177057042509, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803550630100568900, guid: 2bb656680cc8249489e64041a964f432, type: 3}
+      propertyPath: m_Mass
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 5803550630100568900, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_IsKinematic
