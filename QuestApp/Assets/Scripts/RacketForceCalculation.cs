@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Utilities;
 using UnityEngine;
 
 public class RacketForceCalculation : MonoBehaviour
@@ -9,6 +10,8 @@ public class RacketForceCalculation : MonoBehaviour
 
     [SerializeField]
     private GameObject _container;
+
+    [SerializeField] private BallOwnershipTransfer _ballOwnershipTransfer;
 
     private Vector3 _lastPosition;
     private Vector3 _velocity;
@@ -37,16 +40,13 @@ public class RacketForceCalculation : MonoBehaviour
         _lastPosition = gameObject.transform.position;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
+        DebugDisplay.Instance.UpdateDebugText("Collision exit");
         if (collision.gameObject.CompareTag("PadelBall"))
         {
-            Rigidbody ballRb = collision.rigidbody;
-
-            //ballRb.AddForce(_velocity);
-
-            // Apply spin (optional)
-            //ballRb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
+            DebugDisplay.Instance.UpdateDebugText("Ball collision exit");
+            _ballOwnershipTransfer.ReleaseBallOwnershipIfNeeded();
         }
     }
 }

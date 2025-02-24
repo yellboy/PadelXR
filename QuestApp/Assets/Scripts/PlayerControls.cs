@@ -11,6 +11,8 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField] private GameObject _ball;
 
+    [SerializeField] private BallOwnershipTransfer _ballOwnershipTransfer;
+
     private bool _holdingBall = false;
 
     // Start is called before the first frame update
@@ -29,6 +31,8 @@ public class PlayerControls : MonoBehaviour
 
     public void MoveBallToController()
     {
+        _ballOwnershipTransfer.RequestBallOwnershipIfNeeded();
+
         var ballRb = _ball.GetComponent<Rigidbody>();
         ballRb.isKinematic = true;
         ballRb.velocity = Vector3.zero;
@@ -55,6 +59,8 @@ public class PlayerControls : MonoBehaviour
 
     public void MoveBallToDefault()
     {
+        _ballOwnershipTransfer.RequestBallOwnershipIfNeeded();
+
         var ballRb = _ball.GetComponent<Rigidbody>();
         ballRb.isKinematic = true;
         ballRb.velocity = Vector3.zero;
