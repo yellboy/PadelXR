@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Utilities;
@@ -42,10 +43,21 @@ public class RacketForceCalculation : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        DebugDisplay.Instance.UpdateDebugText("Collision exit");
+        DebugDisplay.Instance.UpdateCollisionText($"Collision exit {DateTime.Now.TimeOfDay}");
         if (collision.gameObject.CompareTag("PadelBall"))
         {
-            DebugDisplay.Instance.UpdateDebugText("Ball collision exit");
+            DebugDisplay.Instance.UpdateCollisionText($"Ball collision exit {DateTime.Now.TimeOfDay}");
+            //_ballOwnershipTransfer.ReleaseBallOwnershipIfNeeded();
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        DebugDisplay.Instance.UpdateCollisionText($"Collision enter {DateTime.Now.TimeOfDay}");
+        if (collision.gameObject.CompareTag("PadelBall"))
+        {
+            DebugDisplay.Instance.UpdateCollisionText($"Ball collision enter {DateTime.Now.TimeOfDay}");
             _ballOwnershipTransfer.ReleaseBallOwnershipIfNeeded();
         }
     }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Assets.Scripts.Utilities;
 using Fusion;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine;
 public class BallOwnershipTransfer : NetworkBehaviour
 {
     [SerializeField] private GameObject _playerGameObject;
+
+    private Vector3 _previousPosition;
     
     private bool _transferring;
     private bool _ownershipFromUpdate = false;
-    private bool _releaseRequested = false;
+
+    private bool _canRequestAuthority = false;
 
 
     void Start()
@@ -23,34 +27,27 @@ public class BallOwnershipTransfer : NetworkBehaviour
             return;
         }
 
-        if (_releaseRequested)
+        if (BallMovingTowardsPlayer())
         {
-            DebugDisplay.Instance.UpdateDebugText("Release requested");
-            if (Object.HasStateAuthority)
+            if (_canRequestAuthority)
             {
-                Object.ReleaseStateAuthority();
-                DebugDisplay.Instance.UpdateDebugText("Released");
+                _canRequestAuthority = false;
+                DebugDisplay.Instance.UpdateDebugText("Ball close, requesting ownership");
+                RequestBallOwnershipIfNeeded(true);
+                DebugDisplay.Instance.UpdateDebugText("Ownership requested");
             }
-
-            if (GetPlayerDistance() > 5f)
-            {
-                _releaseRequested = false;
-                DebugDisplay.Instance.UpdateDebugText("Ball went away, can request ownership");
-            }
-        }
-        else if (GetPlayerDistance() <= 5f)
-        {
-            DebugDisplay.Instance.UpdateDebugText("Ball close, requesting ownership");
-            RequestBallOwnershipIfNeeded(true);
-            DebugDisplay.Instance.UpdateDebugText("Ownership requested");
         }
 
         DebugDisplay.Instance.UpdateBallOwnershipText(Object.HasStateAuthority, !_ownershipFromUpdate);
+
+        _previousPosition = gameObject.transform.position;
     }
 
-    private float GetPlayerDistance()
+    private bool BallMovingTowardsPlayer()
     {
-        return (gameObject.transform.position - _playerGameObject.gameObject.transform.position).magnitude;
+        var previousDistance = (_previousPosition.Flattened() - _playerGameObject.gameObject.transform.position.Flattened()).magnitude;
+        var newDistance = (gameObject.transform.position.Flattened() - _playerGameObject.gameObject.transform.position.Flattened()).magnitude;
+        return newDistance < previousDistance;
     }
 
     public void StartTransferring()
@@ -70,6 +67,25 @@ public class BallOwnershipTransfer : NetworkBehaviour
 
     public void ReleaseBallOwnershipIfNeeded()
     {
-        _releaseRequested = true;
+        if (Object.HasStateAuthority)
+        {
+            //Object.ReleaseStateAuthority();
+
+            DebugDisplay.Instance.UpdateDebugText("Releasing ownership");
+
+            RpcSignalRelease(Runner.LocalPlayer);
+        }
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RpcSignalRelease(PlayerRef playerRef)
+    {
+        if (playerRef == Runner.LocalPlayer)
+        {
+            return;
+        }
+
+        _canRequestAuthority = true;
+        DebugDisplay.Instance.UpdateDebugText("Can ask ownership");
     }
 }

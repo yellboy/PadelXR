@@ -11,6 +11,8 @@ namespace Assets.Scripts.Utilities
 
         [SerializeField] private TextMeshProUGUI _ballOwnershipText;
 
+        [SerializeField] private TextMeshProUGUI _collisionText;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -38,6 +40,11 @@ namespace Assets.Scripts.Utilities
             _ballOwnershipText.text =
 @$"{hasOwnershipText}
 {reasonText}";
+        }
+
+        public void UpdateCollisionText(string collisionText)
+        {
+            _collisionText.text = collisionText;
         }
     }
 }

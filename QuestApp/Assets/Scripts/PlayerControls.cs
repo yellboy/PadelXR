@@ -49,12 +49,19 @@ public class PlayerControls : MonoBehaviour
 
     public void DropBall()
     {
+        var wasHoldingBall = _holdingBall;
+
         _holdingBall = false;
         var ballRb = _ball.GetComponent<Rigidbody>();
         ballRb.isKinematic = false;
         ballRb.velocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
         print($"Dropping the ball: {_ball.transform.position}");
+
+        if (!wasHoldingBall)
+        {
+            _ballOwnershipTransfer.ReleaseBallOwnershipIfNeeded();
+        }
     }
 
     public void MoveBallToDefault()
