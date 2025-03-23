@@ -12,8 +12,6 @@ public class RacketForceCalculation : MonoBehaviour
     [SerializeField]
     private GameObject _container;
 
-    [SerializeField] private BallOwnershipTransfer _ballOwnershipTransfer;
-
     private Vector3 _lastPosition;
     private Vector3 _velocity;
 
@@ -58,7 +56,6 @@ public class RacketForceCalculation : MonoBehaviour
         if (collision.gameObject.CompareTag("PadelBall"))
         {
             DebugDisplay.Instance.UpdateCollisionText($"Ball collision enter {DateTime.Now.TimeOfDay}");
-            _ballOwnershipTransfer.ReleaseBallOwnershipIfNeeded();
         }
     }
 }

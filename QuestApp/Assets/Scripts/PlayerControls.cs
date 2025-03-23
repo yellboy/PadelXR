@@ -4,16 +4,20 @@ using System.Threading.Tasks;
 using Fusion;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerControls : NetworkBehaviour
 {
 
     [SerializeField] private GameObject _controllerAnchor;
 
     [SerializeField] private GameObject _ball;
 
-    [SerializeField] private BallOwnershipTransfer _ballOwnershipTransfer;
-
     private bool _holdingBall = false;
+
+    private bool _moveBallToController = false;
+
+    private bool _dropBall = false;
+
+    private bool _moveBallToDefault = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,53 +25,37 @@ public class PlayerControls : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void FixedUpdateNetwork()
     {
+        base.FixedUpdateNetwork();
+
+        if (_moveBallToDefault)
+        {
+            _moveBallToDefault = false;
+            MoveBallToDefaultAction();
+        }
+
+        if (_dropBall)
+        {
+            _holdingBall = false;
+            _dropBall = false;
+            DropBallAction();
+        }
+
         if (_holdingBall)
         {
+            if (_moveBallToController)
+            {
+                _moveBallToController = false;
+                MoveBallToControllerAction();
+            }
+
             TrackController();
         }
     }
 
-    public void MoveBallToController()
+    private void MoveBallToDefaultAction()
     {
-        _ballOwnershipTransfer.RequestBallOwnershipIfNeeded();
-
-        var ballRb = _ball.GetComponent<Rigidbody>();
-        ballRb.isKinematic = true;
-        ballRb.velocity = Vector3.zero;
-        ballRb.angularVelocity = Vector3.zero;
-        TrackController();
-        _holdingBall = true;
-    }
-
-    private void TrackController()
-    {
-        _ball.transform.rotation = Quaternion.identity;
-        _ball.transform.position = _controllerAnchor.transform.position;
-    }
-
-    public void DropBall()
-    {
-        var wasHoldingBall = _holdingBall;
-
-        _holdingBall = false;
-        var ballRb = _ball.GetComponent<Rigidbody>();
-        ballRb.isKinematic = false;
-        ballRb.velocity = Vector3.zero;
-        ballRb.angularVelocity = Vector3.zero;
-        print($"Dropping the ball: {_ball.transform.position}");
-
-        if (!wasHoldingBall)
-        {
-            _ballOwnershipTransfer.ReleaseBallOwnershipIfNeeded();
-        }
-    }
-
-    public void MoveBallToDefault()
-    {
-        _ballOwnershipTransfer.RequestBallOwnershipIfNeeded();
-
         var ballRb = _ball.GetComponent<Rigidbody>();
         ballRb.isKinematic = true;
         ballRb.velocity = Vector3.zero;
@@ -79,22 +67,65 @@ public class PlayerControls : MonoBehaviour
         print($"Ball moved to default: {_ball.transform.position}");
     }
 
+    private void DropBallAction()
+    {
+        var ballRb = _ball.GetComponent<Rigidbody>();
+        ballRb.isKinematic = false;
+        ballRb.velocity = Vector3.zero;
+        ballRb.angularVelocity = Vector3.zero;
+        print($"Dropping the ball: {_ball.transform.position}");
+    }
+
+    public void MoveBallToController()
+    {
+        _moveBallToController = true;
+        _holdingBall = true;
+    }
+
+    public void MoveBallToControllerAction()
+    {
+        var ballRb = _ball.GetComponent<Rigidbody>();
+        ballRb.isKinematic = true;
+        ballRb.velocity = Vector3.zero;
+        ballRb.angularVelocity = Vector3.zero;
+
+        print($"Ball moved to controller: {_ball.transform.position}");
+    }
+
+    private void TrackController()
+    {
+        _ball.transform.rotation = Quaternion.identity;
+        _ball.transform.position = _controllerAnchor.transform.position;
+
+        print($"Ball tracking controller: {_ball.transform.position}");
+    }
+
+    public void DropBall()
+    {
+        _dropBall = true;
+    }
+
+    public void MoveBallToDefault()
+    {
+        _moveBallToDefault = true;
+    }
+
     public void PlayerSpawned()
     {
         StartCoroutine(nameof(ResetBallAfterSpawn));
 
-        MoveBallToDefault();
-        DropBall();
+        //MoveBallToDefault();
+        //DropBall();
     }
 
     private IEnumerator ResetBallAfterSpawn()
     {
         yield return new WaitForFixedUpdate();
 
-        MoveBallToDefault();
+        MoveBallToDefaultAction();
 
         yield return new WaitForFixedUpdate();
 
-        DropBall();
+        DropBallAction();
     }
 }

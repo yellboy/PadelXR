@@ -8,7 +8,6 @@ namespace Assets.Scripts.Networking
     public class NetworkRunnerHandler : MonoBehaviour
     {
         [SerializeField] private PlayerControls _playerControls;
-        [SerializeField] private BallOwnershipTransfer _ballOwnershipTransfer;
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
@@ -22,8 +21,6 @@ Local player: {runner.LocalPlayer.PlayerId}.
 Active players: {string.Join(", ", runner.ActivePlayers.Select(p => p.PlayerId))}";
 
             DebugDisplay.Instance.UpdateDebugText(text);
-
-            _ballOwnershipTransfer.StartTransferring();
 
             if (player.PlayerId == runner.LocalPlayer.PlayerId)
             {

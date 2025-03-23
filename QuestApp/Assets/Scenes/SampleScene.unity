@@ -489,7 +489,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerControls: {fileID: 440184584}
-  _ballOwnershipTransfer: {fileID: 6010254552248547314}
 --- !u!1 &440184581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
@@ -521,7 +520,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controllerAnchor: {fileID: 1618206452}
   _ball: {fileID: 6010254552248547301}
-  _ballOwnershipTransfer: {fileID: 6010254552248547314}
+--- !u!114 &440184586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440184581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 4175580076
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 440184584}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1 &584841364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1396,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 440184584}
+    - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 440184586}
     - targetCorrespondingSourceObject: {fileID: 2483171112401766338, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1618206451}
@@ -1463,7 +1483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunnerPrefab: {fileID: 222821101}
   StartMode: 1
-  AutoStartAs: 2
+  AutoStartAs: 4
   AutoHideGUI: 1
   AutoClients: 1
   ClientStartDelay: 0.1
@@ -1787,11 +1807,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 441879013
   ObjectInterest: 1
-  Flags: 524289
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 6010254552248547308}
-  - {fileID: 6010254552248547314}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &6010254552248547308
 MonoBehaviour:
@@ -1828,7 +1847,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b714e028337a9b949923affb55fdfdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _runner: {fileID: 0}
+  _object: {fileID: 0}
+  InvokeRpc: 0
+  ObjectIndex: 0
+  WordOffset: 0
+  WordCount: 0
+  DefaultReplicated: 1
   _playerGameObject: {fileID: 440184581}
+  _previousPosition: {x: 0, y: 0, z: 0}
+  _transferring: 0
+  _ownershipFromUpdate: 0
+  _canRequestAuthority: 0
 --- !u!1001 &7173704091515310629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1855,7 +1885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4141924177057042509, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.827
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4141924177057042509, guid: 2bb656680cc8249489e64041a964f432, type: 3}
       propertyPath: m_LocalPosition.z
