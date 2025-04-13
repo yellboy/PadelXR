@@ -27,19 +27,9 @@ namespace Assets.Scripts.Utilities
             _debugText.text = debugText;
         }
 
-        public void UpdateBallOwnershipText(bool hasBallOwnership, bool requestedByPlayer)
+        public void UpdateCommunicationText(string text)
         {
-            var hasOwnershipText = $"Has ball ownership: {hasBallOwnership}.";
-            var reasonText = string.Empty;
-            if (hasBallOwnership)
-            {
-                var reason = requestedByPlayer ? "requested" : "automatic";
-                reasonText = $"Reason: {reason}";
-            }
-
-            _ballOwnershipText.text =
-@$"{hasOwnershipText}
-{reasonText}";
+            _ballOwnershipText.text = text;
         }
 
         public void UpdateCollisionText(string collisionText)

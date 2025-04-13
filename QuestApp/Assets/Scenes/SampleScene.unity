@@ -360,7 +360,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnInput:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 440184587}
+        m_TargetAssemblyTypeName: Assets.Scripts.PlayerInput, Assembly-CSharp
+        m_MethodName: OnInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnInputMissing:
     m_PersistentCalls:
       m_Calls: []
@@ -489,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerControls: {fileID: 440184584}
+  _playerPrefab: {fileID: 4391107801809476597, guid: e818bbe3d6d91e344a916a82990fcb05, type: 3}
 --- !u!1 &440184581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
@@ -539,6 +552,18 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 440184584}
   ForceRemoteRenderTimeframe: 0
+--- !u!114 &440184587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440184581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd99302227148d4d97a92336be60cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &584841364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,6 +1424,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 440184586}
+    - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 440184587}
     - targetCorrespondingSourceObject: {fileID: 2483171112401766338, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1618206451}
@@ -1847,18 +1875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b714e028337a9b949923affb55fdfdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runner: {fileID: 0}
-  _object: {fileID: 0}
-  InvokeRpc: 0
-  ObjectIndex: 0
-  WordOffset: 0
-  WordCount: 0
-  DefaultReplicated: 1
-  _playerGameObject: {fileID: 440184581}
-  _previousPosition: {x: 0, y: 0, z: 0}
-  _transferring: 0
-  _ownershipFromUpdate: 0
-  _canRequestAuthority: 0
 --- !u!1001 &7173704091515310629
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,8 +9,31 @@ namespace Assets.Scripts.Networking
     {
         [SerializeField] private PlayerControls _playerControls;
 
+        [SerializeField] private GameObject _playerPrefab;
+
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
+            var spawnPosition = runner.LocalPlayer.PlayerId == 2 ? new Vector3(0, 0, 8) : new Vector3(0, 0, -8);
+            var spawnRotation = runner.LocalPlayer.PlayerId == 2 ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+
+            if (runner.IsServer)
+            {
+                var playerObject = runner.Spawn(_playerPrefab, spawnPosition, spawnRotation, player);
+                playerObject.gameObject.transform.SetParent(Camera.main.transform);
+            }
+
+            if (player.PlayerId == runner.LocalPlayer.PlayerId)
+            {
+                runner.ProvideInput = true;
+                _playerControls.PlayerSpawned();
+            }
+
+            if (runner.LocalPlayer.PlayerId == 2)
+            {
+                _playerControls.gameObject.transform.position = new Vector3(0, 0, 8);
+                _playerControls.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
             var text =
 $@"Player {player.PlayerId} joined.
 Is server: {runner.IsServer}
@@ -22,16 +45,6 @@ Active players: {string.Join(", ", runner.ActivePlayers.Select(p => p.PlayerId))
 
             DebugDisplay.Instance.UpdateDebugText(text);
 
-            if (player.PlayerId == runner.LocalPlayer.PlayerId)
-            {
-                _playerControls.PlayerSpawned();
-            }
-
-            if (runner.LocalPlayer.PlayerId == 2)
-            {
-                _playerControls.gameObject.transform.position = new Vector3(0, 0, 8);
-                _playerControls.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
         }
 
         public void OnConnectedToServer(NetworkRunner runner)
