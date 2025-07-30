@@ -500,8 +500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3831810c7cc134343bcf555c4444e6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerControls: {fileID: 440184584}
   _playerPrefab: {fileID: 4391107801809476597, guid: e818bbe3d6d91e344a916a82990fcb05, type: 3}
+  _ball: {fileID: 6010254552248547301}
+  _controllerAnchor: {fileID: 1618206452}
 --- !u!1 &440184581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
@@ -519,20 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2680cf0dac899a14b99cbe965c19feb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &440184584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440184581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b05a5d626ca955499a8c28077c6040a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _controllerAnchor: {fileID: 1618206452}
-  _ball: {fileID: 6010254552248547301}
 --- !u!114 &440184586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,8 +536,7 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 440184584}
+  NetworkedBehaviours: []
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &440184587
 MonoBehaviour:
@@ -564,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd99302227148d4d97a92336be60cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftController: {fileID: 1618206452}
 --- !u!1 &584841364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,79 +1202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d376240d064f4484e81824d51391caf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonClickActions:
-  - Title: 
-    Button: 8192
-    ButtonMode: 0
-    Callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 440184584}
-          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-          m_MethodName: DropBall
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Title: 
-    Button: 8192
-    ButtonMode: 1
-    Callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 440184584}
-          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-          m_MethodName: MoveBallToController
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Title: 
-    Button: 4
-    ButtonMode: 1
-    Callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 440184584}
-          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-          m_MethodName: MoveBallToDefault
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Title: 
-    Button: 4
-    ButtonMode: 0
-    Callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 440184584}
-          m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-          m_MethodName: DropBall
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  _buttonClickActions: []
 --- !u!114 &1539940711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,9 +1335,6 @@ PrefabInstance:
       addedObject: {fileID: 440184583}
     - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 440184584}
-    - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 440184586}
     - targetCorrespondingSourceObject: {fileID: 3642352042163518208, guid: f54012181eacade4ea242c65f804720f, type: 3}
       insertIndex: -1
@@ -1511,7 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunnerPrefab: {fileID: 222821101}
   StartMode: 1
-  AutoStartAs: 4
+  AutoStartAs: 5
   AutoHideGUI: 1
   AutoClients: 1
   ClientStartDelay: 0.1
